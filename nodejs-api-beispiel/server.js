@@ -34,7 +34,7 @@ app.get("/products", (req, res) => {
 
 app.get("/products/:id", (req, res) => {
   const id = req.params.id;
-  db.get("SELECT * FROM products WHERE id = ?",[id], (err, product) => {
+  db.get("SELECT * FROM products WHERE id = ?", [id], (err, product) => {
     if (err) {
       console.log(err);
       res.sendStatus(500);
@@ -45,9 +45,31 @@ app.get("/products/:id", (req, res) => {
 });
 
 app.post("/products", (req, res) => {
-  const {titel,preis} = req.body;
-  db.run("INSERT INTO products (titel,preis) VALUES (?,?)", [titel,preis])
-  res.status(201).send("Produkt erfolgreich erstellt");
+  const { titel, preis } = req.body;
+  db.get(
+    "INSERT INTO products (titel,preis) VALUES (?,?) returning *",
+    [titel, preis],
+    (err, product) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.json(product);
+      }
+    }
+  );
+});
+
+app.delete("/products/:id", (req, res) => {
+  const id = req.params.id;
+  db.run("DELETE FROM products WHERE id = ?", [id], (err) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.status(200).send("Produkt mit der ID " + id + " wurde gelöscht.");
+    }
+  });
 });
 
 app.listen(5006, () => {
