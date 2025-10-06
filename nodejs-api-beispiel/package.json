@@ -1,16 +1,21 @@
 {
-  "name": "nodejs-api-beispiel",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "express": "^5.1.0",
-    "sqlite3": "^5.1.7"
-  }
+	"name": "nodejs-api-beispiel",
+	"version": "1.0.0",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format:check": "prettier --check .",
+		"format": "prettier --write ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"express": "^5.1.0",
+		"sqlite3": "^5.1.7"
+	},
+	"devDependencies": {
+		"prettier": "^3.6.2"
+	}
 }
