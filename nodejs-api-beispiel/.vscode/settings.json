@@ -1,0 +1,6 @@
+{
+  "prettier.enable": true,
+  "prettier.requireConfig": true,
+  "editor.formatOnSave": true,
+  "prettier.configPath": ".prettierrc"
+}
