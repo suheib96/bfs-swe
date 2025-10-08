@@ -1,5 +1,5 @@
 function addieren(a,b){
-    return a * b
+    return a + b
 }
 
 function subtrahieren(a,b){
