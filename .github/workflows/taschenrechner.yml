@@ -31,6 +31,20 @@ jobs:
               with:
                   name: coverage
                   path: tdd-example/coverage
+
+            - name: send success message
+              if: ${{ success() }} 
+              uses: appleboy/discord-action@v1.2.0
+              with:
+                webhook_url: ${{ secrets.WEBHOOK_URL }}
+                message: ✅ Test erfolgreich durchgelaufen !!
+
+            - name: send failure message
+              if: ${{ failure() }}
+              uses: appleboy/discord-action@v1.2.0
+              with:
+                webhook_url: ${{ secrets.WEBHOOK_URL }}
+                message: ❌ Irgendetwas ist schief gelaufen..
             
             
     deploy:
