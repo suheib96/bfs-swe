@@ -24,7 +24,7 @@ jobs:
               uses: actions/upload-artifact@v5
               with:
                   name: coverage
-                  path: tdd-example/coverage
+                  path: tdd-example/coverage/lcov-report/index.html
             
 
             
