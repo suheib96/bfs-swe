@@ -6,6 +6,12 @@ jobs:
     test-taschenrechner:
         runs-on: ubuntu-latest
         steps:
+            - name: send custom message
+              uses: appleboy/discord-action@v1.2.0
+              with:
+                webhook_url: ${{ secrets.WEBHOOK_URL }}
+                message: The ${{ github.event_name }} event triggered first step.
+                 
             - name: checkout
               uses: actions/checkout@v5
 
@@ -44,4 +50,4 @@ jobs:
             run: |
                 scp -i ~/.ssh/meinPrivateKey tdd-example/math.js ubuntu@${{ secrets.EC2_IP}}:/home/ubuntu/math.js
 
-            
+          
