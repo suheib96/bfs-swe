@@ -32,6 +32,10 @@ jobs:
                   echo  "${{ secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/meinPrivateKey
                   chmod 400 ~/.ssh/meinPrivateKey
                   ssh-keyscan -H ${{ secrets.EC2_IP}} >> ~/.ssh/known_hosts
-          
+            
+            - name: deploy math.js
+              run: |
+                  scp -i ~/.ssh/meinPrivateKey tdd-example/math.js ubuntu@${{ secrets.EC2_IP}}:/home/ubuntu/math.js
+
 
             
