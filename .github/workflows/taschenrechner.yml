@@ -19,6 +19,12 @@ jobs:
 
             - name: run tests
               run: cd tdd-example && npm run test
+
+            - name: upload coverage artifact
+              uses: actions/upload-artifact@v5
+              with:
+                  name: coverage
+                  path: tdd-example/coverage
             
 
             
