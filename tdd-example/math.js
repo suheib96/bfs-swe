@@ -1,5 +1,5 @@
 function addieren(a,b){
-    return a - b
+    return a + b
 }
 
 function subtrahieren(a,b){
@@ -8,6 +8,9 @@ function subtrahieren(a,b){
 
 function multiply(a,b){
     return a * b
+}
+function dummyFunction(){
+    console.log("Hier könnte was cooles passieren")
 }
 
 function dividieren(a,b){
