@@ -1,6 +1,6 @@
 name: Mein Taschenrechner Workflow
 
-on: push
+on: workflow_dispatch
 
 jobs:
     test-taschenrechner:

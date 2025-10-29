@@ -1,0 +1,28 @@
+name: Express Docker Deploy Workflow
+
+on: push
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v5
+
+            - name: ssh setup
+              run: |
+                  mkdir -p ~/.ssh
+                  echo  "${{ secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/meinPrivateKey
+                  chmod 400 ~/.ssh/meinPrivateKey
+                  ssh-keyscan -H ${{ secrets.EC2_IP}} >> ~/.ssh/known_hosts
+
+            - name: copy nodejs app to ec2
+              run: |
+                  scp -i ~/.ssh/meinPrivateKey -r nodejs-api-beispiel ubuntu@${{ secrets.EC2_IP}}:/home/ubuntu
+
+            - name: build & run docker image
+              run: |
+                  ssh -i ~/.ssh/meinPrivateKey ubuntu@${{ secrets.EC2_IP}} \
+                  'cd nodejs-api-beispiel && docker build -t nodejs-api-beispiel . && \
+                   docker run -d -p 3000:5006 nodejs-api-beispiel \
+                   '
